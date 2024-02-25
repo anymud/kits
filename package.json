@@ -1,0 +1,37 @@
+{
+  "name": "@anymud/kits",
+  "author": {
+    "name": "shtse8",
+    "email": "shtse8@gmail.com"
+  },
+  "version": "v0.0.1",
+  "scripts": {
+    "build": "bun build.ts"
+  },
+  "description": "kits",
+  "license": "MIT",
+  "repository": "https://github.com/anymud/kits",
+  "private": false,
+  "module": "index.ts",
+  "type": "module",
+  "dependencies": {
+    "module-alias": "^2.2.3",
+    "consola": "^3.2.3",
+    "@nuxt/kit": "^3.10.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/module-alias": "^2.0.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+  ]
+}
