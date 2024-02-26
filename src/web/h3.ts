@@ -1,6 +1,6 @@
-import { getKeys } from '../../kit/type'
+// import { getKeys } from '../types'
 import z from 'zod'
-import { getHeader } from 'h3'
+import { getCookie, getHeader, getRequestIP } from 'h3'
 
 
 type H3Event = Parameters<typeof getCookie>[0]
@@ -78,7 +78,7 @@ export function getBestAccept<Type extends string = string, Subtype extends stri
 export function proxifyHeaders<THeader extends Record<string, string>>(headers: THeader, ...keys: (keyof THeader)[]): Record<string, string> {
   const proxiedHeaders = {} as Record<string, string>
   if (!keys.length)
-    keys = getKeys(headers)
+    keys = Object.keys(headers)
   for (const key of keys)
     proxiedHeaders[`x-${String(key)}`] = headers[key]
   return proxiedHeaders

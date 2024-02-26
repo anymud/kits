@@ -1,4 +1,4 @@
-import { groupBy, mapValues } from '../utils'
+import { groupBy, mapValues } from '~/utils'
 
 interface UriData {
   scheme?: string

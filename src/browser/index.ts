@@ -8,10 +8,10 @@ export function createBrowser() {
     // selectors.register('shadow', selectorEngine)
     // const chromiumExtra = addExtra(chromium)
     // chromiumExtra.use(stealth())
-    const runtimeConfig = useRuntimeConfig()
+    // const runtimeConfig = useRuntimeConfig()
     return chromium.launch({
         headless: true,
-        executablePath: runtimeConfig.browser.chromium.path,
+        // executablePath: runtimeConfig.browser.chromium.path,
         args: [
         '--no-sandbox',
         '--headless',

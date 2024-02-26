@@ -1,6 +1,6 @@
 import type { Nullable } from '@antfu/utils'
 import type { Promisable } from 'type-fest'
-import { isPromise } from './type'
+import { isPromise } from './types'
 
 export function tryOrDefault<T>(fn: () => T): Nullable<T>
 export function tryOrDefault<T>(fn: () => Promisable<T>): Promise<Nullable<T>>
@@ -17,7 +17,7 @@ export function tryOrDefault<T, D>(fn: () => Promisable<T>, defaultValue?: D): a
   }
 }
 
-export function instanceFunction<I, F extends Function>(instance: I, caller: (instance: I) => F): F {
+export function objectFunc<I, F extends Function>(instance: I, caller: (instance: I) => F): F {
   return caller(instance).bind(instance)
 }
 
@@ -27,10 +27,3 @@ export function asError(e: any): Error {
     return e
   return new Error(String(e))
 }
-
-export * from './bits'
-export * from './utils'
-export * from './lazy'
-export * from './stream'
-export * from './type'
-export * from './date'

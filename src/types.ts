@@ -1,5 +1,6 @@
-import type { Constructor } from '@antfu/utils'
 import { zip } from './iter'
+
+type Constructor<T> = new (...args: any[]) => T
 
 export type Func<Args extends any[] = void[], T = void> = (...args: Args) => T
 export type Action<Args extends any[] = void[]> = Func<Args>

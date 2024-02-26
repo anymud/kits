@@ -22,11 +22,8 @@ export function copyWith(request: Request, info: RequestInit & { url?: URL }) {
       method: info.method || request.method,
       headers: info.headers || request.headers,
       body: info.body || request.body,
-      referrer: info.referrer || request.referrer,
-      referrerPolicy: info.referrerPolicy || request.referrerPolicy,
       mode: info.mode || request.mode,
       credentials: info.credentials || request.credentials,
-      cache: info.cache || request.cache,
       redirect: info.redirect || request.redirect,
       integrity: info.integrity || request.integrity,
       keepalive: info.keepalive || request.keepalive,
@@ -34,3 +31,11 @@ export function copyWith(request: Request, info: RequestInit & { url?: URL }) {
     }
   );
 }
+
+// export {
+  
+//   getAccept,
+//   getBestAccept,
+//   proxifyHeaders,
+//   parseAcceptLanguage,
+// } from './h3'

@@ -1,6 +1,5 @@
 import { Readable, Writable, Duplex } from 'stream';
 import { asError } from '.'
-import { Stream } from 'openai/streaming.mjs';
 import { buffer, text } from 'stream/consumers'
 
 export function toNodeReadable(readableStream: ReadableStream): Readable {

@@ -1,6 +1,6 @@
 // import { languages } from '@vitalets/google-translate-api'
-import type { ValueOfArray } from './type'
-import { isKeyOf } from './type'
+import type { ValueOfArray } from './types'
+import { isKeyOf } from './types'
 
 export type EnumValue = string | number
 

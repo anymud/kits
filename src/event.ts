@@ -18,6 +18,6 @@ export type TypedEventEmitter<T> = {
   setMaxListeners(n: number): void
 }
 
-function createTypedEventEmitter<T>(): TypedEventEmitter<T> {
+export function createTypedEventEmitter<T>(): TypedEventEmitter<T> {
   return new EventEmitter() as any
 }

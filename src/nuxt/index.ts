@@ -1,10 +1,11 @@
-import type { ObjectDirective } from '@vue/runtime-core'
-import { isClient, tryOnMounted, useBrowserLocation } from '@vueuse/core'
+import { computed, ref, watch, type ComputedRef, type MaybeRefOrGetter, type ObjectDirective, type Ref, toRef } from '@vue/runtime-core'
+import { asyncComputed, isClient, tryOnMounted, useBrowserLocation } from '@vueuse/core'
 import { toValue, type ReadonlyRefOrGetter } from '@vueuse/shared'
-import { isEqual } from '../../kit/utils'
-import {absoluteTo, getHost, getOrigin, isAbsolute, toString} from '../../kit/text/uri'
-import { isObject } from '../type'
-import type { MayBePromise } from '../type'
+import { isEqual } from '../utils'
+import {absoluteTo, getHost, getOrigin, isAbsolute, toString} from '../uri'
+import { isObject } from '../types'
+import type { MayBePromise } from '../types'
+import { useRoute, useRequestURL } from 'nuxt/app'
 
 export function useUrl(): ComputedRef<string> {
   // return useState(() => {
@@ -39,9 +40,9 @@ export function useOrigin<T extends string | undefined>(url?: MaybeRefOrGetter<T
 }
 
 export function useAbsoluteUrl<T extends string | undefined, T2 extends string | undefined>(url: MaybeRefOrGetter<T>, baseUrl?: MaybeRefOrGetter<T2>) : ComputedRef<string | undefined> {
-  const targetBaseUrl = baseUrl ? resolveRef(baseUrl) : useUrl()
+  const targetBaseUrl = baseUrl ? toRef(baseUrl) : useUrl()
   return computed(() => {
-    const value = resolveUnref(url)
+    const value = toValue(url)
     if (!value)
       return value
     if (isAbsolute(value))
@@ -76,32 +77,32 @@ export interface IWindowOptions {
   status?: boolean
 }
 
-export function openWindow(url: string, target?: string, options: IWindowOptions = {}): Window | undefined {
-  return window.open(
-    url,
-    target,
-    Object.entries(options).map(x => `${x[0]}=${Number(x[1])}`).join(','),
-  ) ?? undefined
-}
+// export function openWindow(url: string, target?: string, options: IWindowOptions = {}): Window | undefined {
+//   return window.open(
+//     url,
+//     target,
+//     Object.entries(options).map(x => `${x[0]}=${Number(x[1])}`).join(','),
+//   ) ?? undefined
+// }
 
-export function openPopupWindow(url: string, target?: string): Window | undefined {
-  return openWindow(
-    url,
-    target,
-    {
-      height: 454,
-      width: 580,
-      left: 0,
-      top: 200,
-      resizable: true,
-      scrollbars: true,
-      toolbar: true,
-      menubar: false,
-      location: false,
-      directories: false,
-      status: true,
-    })
-}
+// export function openPopupWindow(url: string, target?: string): Window | undefined {
+//   return openWindow(
+//     url,
+//     target,
+//     {
+//       height: 454,
+//       width: 580,
+//       left: 0,
+//       top: 200,
+//       resizable: true,
+//       scrollbars: true,
+//       toolbar: true,
+//       menubar: false,
+//       location: false,
+//       directories: false,
+//       status: true,
+//     })
+// }
 
 type MayBeFunction<T> = (() => T) | T
 export function defineObjectDirective<T = any, V = any>(directive: MayBeFunction<ObjectDirective<T, V>>) {
@@ -118,11 +119,11 @@ export async function awaitableComputedAsync<T = any>(getter: () => Promise<T>) 
 }
 
 export function resolveUnrefDeep<T>(value: MaybeDeepRef<T>): T {
-  let valueUnref = resolveUnref(value)
+  let valueUnref = toValue(value)
   if (isObject(valueUnref)) {
     valueUnref = Object.assign({}, valueUnref)
     for (const key in valueUnref)
-      valueUnref[key] = resolveUnref(valueUnref[key])
+      valueUnref[key] = toValue(valueUnref[key])
   }
   return valueUnref as T
 }

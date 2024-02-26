@@ -1,5 +1,5 @@
-import type { MayBeArray } from './type'
-import {isArray, isObject, throwError} from './type'
+import type { MayBeArray } from './types'
+import {isArray, isObject, throwError} from './types'
 
 type ObjectSelector<T, K, R = T> = (value: T, key: K) => R
 type ObjectPredicate<T, K> = ObjectSelector<T, K, boolean>
