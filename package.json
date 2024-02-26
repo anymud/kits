@@ -24,7 +24,6 @@
     "defu": "^6.1.4",
     "file-type": "^19.0.0",
     "h3": "^1.11.1",
-    "module-alias": "^2.2.3",
     "nanoid": "^5.0.6",
     "nuxt": "^3.10.3",
     "playwright": "^1.41.2",
@@ -38,7 +37,6 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/module-alias": "^2.0.4",
     "@types/urijs": "^1.19.25",
     "bun-plugin-dts": "^0.2.1",
     "urijs": "^1.19.11"
